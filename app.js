@@ -1,41 +1,63 @@
-const addBtn = document.getElementById('add-btn');
-const displayArea = document.getElementById('all-books');
+const books = [
+  {
+    title: 'Python',
+    author: 'Ken',
+  },
 
-const books = [];
+  {
+    title: 'C#',
+    author: 'June',
+  },
+];
 
-addBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  const formInputs = document.querySelectorAll('form input');
-  const addedBook = {};
-  for (let i = 0; i < formInputs.length; i += 1) {
-    addedBook.id = Math.floor(Math.random() * 1000);
-    addedBook[formInputs[i].name] = formInputs[i].value;
-    formInputs[i].value = '';
+const displayAllBooks = () => {
+  localStorage.setItem('allBooks', JSON.stringify(books));
+  const booksSection = document.getElementById('all-books');
+
+  // get books from local storage
+  const booksInLocalStorage = JSON.parse(localStorage.getItem('allBooks'));
+  console.log(booksInLocalStorage);
+  let elements = '';
+
+  // Loop through the books
+  if (booksInLocalStorage) {
+    booksInLocalStorage.forEach((book) => {
+      elements += `
+        <div class='book-details'>
+          <h3>${book.title} by ${book.author}</h3>
+          <button onclick={deleteBook(${book.index})} class='delete-button'>Remove</button>
+        </div>
+      `;
+    });
+    booksSection.innerHTML = elements;
   }
-  books.push(addedBook);
-  const booksData = JSON.stringify(books);
-  localStorage.setItem('allBooks', booksData);
+};
+
+displayAllBooks();
+
+const addNewBook = () => {
+  // get user inputs
+  const titleInput = document.getElementById('title-input').value;
+  const authorInput = document.getElementById('author-input').value;
+
+  // new book object
+  const newBook = {
+    title: titleInput,
+    author: authorInput,
+  };
+  books.push(newBook);
+  displayAllBooks();
+};
+
+// submit form
+const form = document.getElementById('add-book-form');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  addNewBook();
 });
 
-const booksInLocalStorage = Array.from(JSON.parse(localStorage.getItem('allBooks')));
-if (booksInLocalStorage) {
-  booksInLocalStorage.forEach((book) => {
-    const bookContent = `
-      <div class="book-details">
-        <h3>${book.title}</h3>
-        <p>${book.author}</p
-        <button type="button" id='delete-book-${book.id}'>Remove</button>
-      </div>
-    `;
-    const div = document.createElement('div');
-    div.innerHTML = bookContent;
-    displayArea.append(div);
-  });
-}
-
-const id = booksInLocalStorage.map(({ id }) => id);
-console.log(id);
-const deleteBtn = document.getElementById(`delete-book-${id}`);
-deleteBtn.addEventListener('click', () => {
-  booksInLocalStorage.filter((book) => book.id !== id);
-});
+// delete book
+const deleteBook = (index) => {
+  books.splice(index, 1);
+  displayAllBooks();
+};
