@@ -1,59 +1,53 @@
-const allBooks = [];
 class Book {
   constructor(title, author) {
     this.title = title;
     this.author = author;
-    this.allBooksSection = document.getElementById('all-books');
-    this.titleInput = document.getElementById('title-input');
-    this.authorInput = document.getElementById('author-input');
+    this.booksSection = document.getElementById('all-books');
+    this.booksInLocalStorage = JSON.parse(localStorage.getItem('allBooks'));
+    this.titleInput = document.getElementById('title-input').value;
+    this.authorInput = document.getElementById('author-input').value;
     this.form = document.getElementById('add-book-form');
-    this.books = JSON.parse(localStorage.getItem('books'));
   }
 
   displayAllBooks() {
-    // this.allBooksSection.innerHTML = '';
-    this.books.forEach((book, index) => {
-      const bookDetails = `
-        <div class='book-details>
-            <h3 class='title'>${book.title} by ${book.author} </h3>
-        </div>
-      `;
+    localStorage.setItem('allBooks', JSON.stringify(this.books));
+    // get books from local storage
+    let elements = '';
 
-      const deleteBtn = document.createElement('button');
-      deleteBtn.innerHTML = 'Remove';
-      deleteBtn.classList.add('delete-button');
-      deleteBtn.addEventListener('click', () => {
-        this.books.splice(index, 1);
-        localStorage.setItem('books', JSON.stringify(this.books));
-        this.displayAllBooks();
+    // Loop through the books
+    if (this.booksInLocalStorage) {
+      this.booksInLocalStorage.forEach((book) => {
+        elements += `
+          <div class='book-details'>
+            <h3>${book.title} by ${book.author}</h3>
+            <button onclick={deleteBook(${book.index})} class='delete-button'>Remove</button>
+          </div>
+        `;
       });
-      const div = document.createElement('div');
-      div.innerHTML += bookDetails;
-      div.appendChild(deleteBtn);
-      this.allBooksSection += (div);
-      console.log(this.allBooksSection);
-    });
+      this.booksSection.innerHTML = elements;
+    }
   }
 
   addNewBook(title, author) {
+    // new book object
     const newBook = new Book(title, author);
-    allBooks.push({ title: newBook.titleInput.value, author: this.authorInput.value });
-    localStorage.setItem('books', JSON.stringify(allBooks));
-    console.log(newBook);
-    this.resetForm();
+    this.books.push({ title: newBook.titleInput, author: newBook.authorInput });
     this.displayAllBooks();
   }
 
-  resetForm() {
-    this.titleInput.value = '';
-    this.authorInput.value = '';
-  }
-
+  // submit form
   submitForm() {
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
       this.addNewBook();
-      this.resetForm();
     });
   }
+
+  // delete book
+  deleteBook(index) {
+    this.books.splice(index, 1);
+    this.displayAllBooks();
+  }
 }
+
+this.displayAllBooks();
