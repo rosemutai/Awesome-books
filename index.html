@@ -5,22 +5,61 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Awesome-books</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <nav class="navbar">
-    <h1 class="title">Awesome books</h1>
+    <h4>Awesome Books</h4>
+      <ul class="links" id="">
+        <li><a id="home-link" class="active" href="index.html">List</a></li>
+        <li><a id="form-link" href="#form-section">Add new</a></li>
+        <li><a id="contact-link" href="#" class="contact">Contact</a></li>
+      </ul>
   </nav>
 
   <main class="main-content">
-    <section id="all-books"></section>
-    <section class="add-book">
+    <div class="date">
+      <p id="dateLine"></p>
+    </div>
+    <div class="title-section" id="titleSection">
+        <h1 class="title">All Awesome books</h1>
+      </div>
+    <section id="all-books">
+       <div class='book-details'>
+          <h3>Java by Ken</h3>
+          <button class='delete-button'>Remove</button>
+        </div>
+
+         <div class='book-details'>
+          <h3>Python by Brian</h3>
+          <button class='delete-button'>Remove</button>
+        </div>
+    </section>
+    <section class="add-book" id="form-section">
       <form id="add-book-form">
-        <input type="text" name="title" id="title-input" placeholder="Title">
-        <input type="text" name="author" id="author-input" placeholder="Author">
+        <h2 class="title">Add a new book</h2>
+        <input type="text" name="title" id="title-input" placeholder="Title" required>
+        <input type="text" name="author" id="author-input" placeholder="Author" required autocomplete="off">
         <button class="add" id="add-btn">Add</button>
       </form>
     </section>
+
+    <section class="contact" id="contact-section">
+      <h2 class="title">Contact Information</h2>
+      <p>Do you have any questions or you just want to say
+        "Hello?" <br> You can reach out to us!
+      </p>
+      <ul class="our-contacts">
+        <li>Our e-mail: mail@mail.com</li>
+        <li>Our phone number: 0043585534422</li>
+        <li>Our address: Streetname 22, 84503 City, Country</li>
+      </ul>
+    </section>
   </main>
+
+  <footer>
+    <p class="copyright">Copyright</p>
+  </footer>
   <script src="app.js"></script>
 </body>
 </html>
