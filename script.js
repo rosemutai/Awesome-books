@@ -9,25 +9,20 @@ class Book {
     const title = document.getElementById('title-input').value;
     const author = document.getElementById('author-input').value;
 
-    const newBook = {
-      title,
-      author,
-    };
+    const newBook = { title, author };
     allBooks.push(newBook);
-    localStorage.setItem('books', JSON.stringify(allBooks));
+    localStorage.setItem('localbooks', JSON.stringify(allBooks));
     return this;
   }
 
   displayBooks() {
     const booksSection = document.getElementById('all-books');
     booksSection.innerHTML = '';
-    // get from localstorage
-    const myBooks = JSON.parse(localStorage.getItem('books'));
+    // get books from localstorage
+    const myBooks = JSON.parse(localStorage.getItem('localbooks'));
     myBooks.forEach((book, index) => {
       const div = document.createElement('div');
       div.classList.add('book-details');
-      booksSection.append(div);
-
       const h3 = document.createElement('h3');
       h3.innerHTML = `${book.title} by ${book.author}`;
       div.append(h3);
@@ -36,19 +31,21 @@ class Book {
       deleteBtn.innerHTML = 'Remove';
       deleteBtn.addEventListener('click', () => {
         allBooks.splice(index, 1);
-        localStorage.setItem('books', JSON.stringify(allBooks));
+        localStorage.setItem('localbooks', JSON.stringify(allBooks));
         booksSection.removeChild(div);
       });
       div.append(deleteBtn);
+      booksSection.append(div);
+
       return this;
     });
   }
 }
-const form = document.getElementById('add-book-form');
+const form = document.querySelector('form');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  const book = new Book();
-  book.storeBookInLocalStorage().displayBooks();
+  const aBook = new Book();
+  aBook.storeBookInLocalStorage().displayBooks();
 });
 
 const formSection = document.getElementById('form-section');
@@ -60,7 +57,7 @@ const titleSection = document.getElementById('titleSection');
 const contactSection = document.getElementById('contact-section');
 
 formLink.addEventListener('click', () => {
-  formSection.style.display = 'block';
+  formSection.style.display = 'flex';
   booksSection.style.display = 'none';
   titleSection.style.display = 'none';
   contactSection.style.display = 'none';
