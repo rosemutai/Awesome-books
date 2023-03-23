@@ -199,7 +199,7 @@ If you like this project please follow me on github & twitter and also connect o
 
 <!-- ACKNOWLEDGEMENTS -->
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
-I would like to thank Microverse for this exercise.
+I would like to thank Microverse for this challenge.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
