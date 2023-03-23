@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Source Code Pro', monospace;
+}
+
+.navbar {
+  text-align: center;
+  width: 50%;
+  margin: 12px auto;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid #000;
+  padding: 2px;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+  margin-right: 12px;
+  font-weight: 600;
+  padding-right: 8px;
+}
+
+a:nth-child(-n+1) {
+  border-right: 2px solid #000;
+}
+a.contact {
+  border: none;
+}
+
+.date {
+  display: flex;
+  justify-content: flex-end;
+}
+
+ul.links{
+  list-style-type: none;
+  display: flex;
+}
+
+.main-content,
+.title-section,
+footer {
+  width: 50%;
+  margin: 12px auto;
+  background-color: #fff;
+  border: 0;
+}
+
+.title-section {
+  width: 60%;
+}
+
+#all-books {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #000;
+}
+
+.book-details {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: rgba(196, 196, 196, 0.8);
+  padding: 8px;
+}
+
+.book-details:nth-child(even) {
+  background-color: #fff;
+}
+
+button.add {
+  background-color: #fff;
+  box-shadow: 4px solid #000;
+  border: 1px solid 1px;
+  color: #000;
+  align-self: self-end;
+  align-content: flex-end;
+  margin-left: 90% !important;
+  padding: 4px;
+}
+
+h3,
+h2 {
+  text-align: center;
+  margin-top: 12px;
+}
+
+h2 {
+  margin-block: 20px;
+}
+
+hr {
+  width: 0%;
+  margin: 0 auto;
+  border: none;
+  margin-block: 12px 8px;
+  display: none;
+}
+
+#form-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 50%;
+  background-color: blues;
+  margin: 12px auto;
+  display: none;
+}
+
+form input {
+  width: 100%;
+  padding: 4px;
+  border: 2px solid #000;
+  margin-bottom: 20px;
+}
+
+button.delete-button {
+  border: 2px solid #000;
+  box-shadow: 18px 15px solid #000;
+  padding: 4px;
+  font-weight: 600;
+}
+
+.active {
+  color: #1947df;
+}
+
+footer {
+  margin-top: 8px;
+  border: 2px solid #000;
+}
+
+#contact-section {
+  font-weight: bold;
+  display: none;
+}
+
+
+ul.our-contacts {
+  
+  list-style-position: inside;
+  padding-left: 10%;
+  margin-block: 20px;
+}

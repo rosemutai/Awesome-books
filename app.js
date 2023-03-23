@@ -22,15 +22,24 @@ class Book {
     const booksSection = document.getElementById('all-books');
     booksSection.innerHTML = '';
     // get from localstorage
-    const books = JSON.parse(localStorage.getItem('books'));
-    books.forEach((book, index) => {
-      const bookDetails = `
-        <div class='book-details'>
-          <h3>${book.title} by ${book.author}</h3>
-          <button class='delete-button'>Remove</button>
-        </div>
-      `;
-      booksSection.innerHTML = bookDetails;
+    const myBooks = JSON.parse(localStorage.getItem('books'));
+    myBooks.forEach((book, index) => {
+      const div = document.createElement('div');
+      div.classList.add('book-details');
+      booksSection.append(div);
+
+      const h3 = document.createElement('h3');
+      h3.innerHTML = `${book.title} by ${book.author}`;
+      div.append(h3);
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.innerHTML = 'Remove';
+      deleteBtn.addEventListener('click', () => {
+        allBooks.splice(index, 1);
+        localStorage.setItem('books', JSON.stringify(allBooks));
+        booksSection.removeChild(div);
+      });
+      div.append(deleteBtn);
       return this;
     });
   }
