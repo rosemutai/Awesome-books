@@ -111,7 +111,8 @@ hr {
   width: 50%;
   background-color: blues;
   margin: 12px auto;
-  display: none;
+  display: flex;
+  /* display: none; */
 }
 
 form input {
