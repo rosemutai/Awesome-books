@@ -1,51 +1,11 @@
-const allBooks = [];
-class Book {
-  constructor(title, author) {
-    this.title = title;
-    this.author = author;
-  }
+import AllBooks from './AllBooks.js';
 
-  storeBookInLocalStorage() {
-    const title = document.getElementById('title-input').value;
-    const author = document.getElementById('author-input').value;
+const books = new AllBooks();
 
-    const newBook = { title, author };
-    allBooks.push(newBook);
-    localStorage.setItem('localbooks', JSON.stringify(allBooks));
-    return this;
-  }
-
-  displayBooks() {
-    const booksSection = document.getElementById('all-books');
-    booksSection.innerHTML = '';
-    // get books from localstorage
-    const myBooks = JSON.parse(localStorage.getItem('localbooks'));
-    myBooks.forEach((book, index) => {
-      const div = document.createElement('div');
-      div.classList.add('book-details');
-      const h3 = document.createElement('h3');
-      h3.innerHTML = `${book.title} by ${book.author}`;
-      div.append(h3);
-
-      const deleteBtn = document.createElement('button');
-      deleteBtn.innerHTML = 'Remove';
-      deleteBtn.addEventListener('click', () => {
-        allBooks.splice(index, 1);
-        localStorage.setItem('localbooks', JSON.stringify(allBooks));
-        booksSection.removeChild(div);
-      });
-      div.append(deleteBtn);
-      booksSection.append(div);
-
-      return this;
-    });
-  }
-}
-const form = document.querySelector('form');
+const form = document.getElementById('add-book-form');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  const aBook = new Book();
-  aBook.storeBookInLocalStorage().displayBooks();
+  books.formAddBook();
 });
 
 const formSection = document.getElementById('form-section');
@@ -55,6 +15,9 @@ const contactLink = document.getElementById('contact-link');
 const booksSection = document.getElementById('all-books');
 const titleSection = document.getElementById('titleSection');
 const contactSection = document.getElementById('contact-section');
+
+formSection.style.display = 'none';
+contactSection.style.display = 'none';
 
 formLink.addEventListener('click', () => {
   formSection.style.display = 'flex';
